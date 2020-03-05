@@ -1,0 +1,69 @@
+version: '2.2'
+services:
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.6.1
+    volumes:
+      - ./kibana/kibana.yml:/usr/share/kibana/config/kibana.yml
+    networks:
+      - elastic
+    ports:
+      - 5601:5601
+  es01:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.6.1
+    container_name: es01
+    environment:
+      - discovery.seed_hosts=es03,es02
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - data01:/usr/share/elasticsearch/data
+      - ./es01/elasticsearch.yml:/etc/elasticsearch/elasticsearch.yml
+      - ./es01/jvm.options:/usr/share/elasticsearch/config/jvm.options.d/jvm.options
+    ports:
+      - 9200:9200
+    networks:
+      - elastic
+  es02:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.6.1
+    container_name: es02
+    environment:
+      - discovery.seed_hosts=es03,es01
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - data02:/usr/share/elasticsearch/data
+      - ./es02/elasticsearch.yml:/etc/elasticsearch/elasticsearch.yml
+      - ./es02/jvm.options:/usr/share/elasticsearch/config/jvm.options.d/jvm.options
+    networks:
+      - elastic
+  es03:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.6.1
+    container_name: es03
+    environment:
+      - discovery.seed_hosts=es01,es02
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - data03:/usr/share/elasticsearch/data
+      - ./es03/elasticsearch.yml:/etc/elasticsearch/elasticsearch.yml
+      - ./es03/jvm.options:/usr/share/elasticsearch/config/jvm.options.d/jvm.options
+    networks:
+      - elastic
+
+volumes:
+  data01:
+    driver: local
+  data02:
+    driver: local
+  data03:
+    driver: local
+
+networks:
+  elastic:
+    driver: bridge
