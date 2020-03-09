@@ -2,60 +2,55 @@ version: '2.2'
 services:
   kibana:
     image: docker.elastic.co/kibana/kibana:7.6.1
+    container_name: kibana
     volumes:
       - ./kibana/kibana.yml:/usr/share/kibana/config/kibana.yml
-    networks:
-      - elastic
     ports:
       - 5601:5601
+    networks:
+      - elastic
   es01:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.6.1
+    image: jjauzion/es-single-node
     container_name: es01
-    environment:
-      - discovery.seed_hosts=es03,es02
-      - cluster.initial_master_nodes=es01,es02,es03
+    command: tail -f /dev/null
     ulimits:
       memlock:
         soft: -1
         hard: -1
     volumes:
       - data01:/usr/share/elasticsearch/data
-      - ./es01/elasticsearch.yml:/etc/elasticsearch/elasticsearch.yml
-      - ./es01/jvm.options:/usr/share/elasticsearch/config/jvm.options.d/jvm.options
+      - ./es01/elasticsearch.yml:/home/ubuntu/elasticsearch-7.6.1/config/elasticsearch.yml
+      - ./es01/jvm.options:/home/ubuntu/elasticsearch-7.6.1/config/jvm.options
     ports:
       - 9200:9200
     networks:
       - elastic
   es02:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.6.1
+    image: jjauzion/es-single-node
     container_name: es02
-    environment:
-      - discovery.seed_hosts=es03,es01
-      - cluster.initial_master_nodes=es01,es02,es03
+    command: tail -f /dev/null
     ulimits:
       memlock:
         soft: -1
         hard: -1
     volumes:
       - data02:/usr/share/elasticsearch/data
-      - ./es02/elasticsearch.yml:/etc/elasticsearch/elasticsearch.yml
-      - ./es02/jvm.options:/usr/share/elasticsearch/config/jvm.options.d/jvm.options
+      - ./es02/elasticsearch.yml:/home/ubuntu/elasticsearch-7.6.1/config/elasticsearch.yml
+      - ./es02/jvm.options:/home/ubuntu/elasticsearch-7.6.1/config/jvm.options
     networks:
       - elastic
   es03:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.6.1
+    image: jjauzion/es-single-node
     container_name: es03
-    environment:
-      - discovery.seed_hosts=es01,es02
-      - cluster.initial_master_nodes=es01,es02,es03
+    command: tail -f /dev/null
     ulimits:
       memlock:
         soft: -1
         hard: -1
     volumes:
       - data03:/usr/share/elasticsearch/data
-      - ./es03/elasticsearch.yml:/etc/elasticsearch/elasticsearch.yml
-      - ./es03/jvm.options:/usr/share/elasticsearch/config/jvm.options.d/jvm.options
+      - ./es03/elasticsearch.yml:/home/ubuntu/elasticsearch-7.6.1/config/elasticsearch.yml
+      - ./es03/jvm.options:/home/ubuntu/elasticsearch-7.6.1/config/jvm.options
     networks:
       - elastic
 
