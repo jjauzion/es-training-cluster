@@ -9,6 +9,7 @@ USER ubuntu
 WORKDIR /home/ubuntu
 RUN wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.6.1-linux-x86_64.tar.gz
 RUN tar -xzf elasticsearch-7.6.1-linux-x86_64.tar.gz
+RUN mkdir /home/ubuntu/elasticsearch-7.6.1/data
 RUN curl -O https://artifacts.elastic.co/downloads/kibana/kibana-7.6.1-linux-x86_64.tar.gz
 RUN tar -xzf kibana-7.6.1-linux-x86_64.tar.gz
 EXPOSE 9200
