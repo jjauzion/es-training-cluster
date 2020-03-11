@@ -1,7 +1,7 @@
 version: '2.2'
 services:
   server1:
-    image: jjauzion/es-kibana-single-node
+    image: jjauzion/elk-single-node
     container_name: server1
     command: tail -f /dev/null
     ulimits:
