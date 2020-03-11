@@ -1,73 +1,89 @@
 version: '2.2'
 services:
-  node00:
+  server1:
     image: jjauzion/es-kibana-single-node
-    container_name: node00
+    container_name: server1
     command: tail -f /dev/null
     ulimits:
       memlock:
         soft: -1
         hard: -1
     volumes:
-      - data00:/home/ubuntu/elasticsearch-7.6.1/data
-      - ./node00/elasticsearch.yml:/home/ubuntu/elasticsearch-7.6.1/config/elasticsearch.yml
-      - ./node00/jvm.options:/home/ubuntu/elasticsearch-7.6.1/config/jvm.options
+      - dataS1:/home/ubuntu/elasticsearch-7.6.1/data
+      - ./server1/elasticsearch.yml:/home/ubuntu/elasticsearch-7.6.1/config/elasticsearch.yml
+      - ./server1/jvm.options:/home/ubuntu/elasticsearch-7.6.1/config/jvm.options
     ports:
       - 9200:9200
       - 5601:5601
     networks:
       - elastic
-  node01:
+  server2:
     image: jjauzion/es-single-node
-    container_name: node01
+    container_name: server2
     command: tail -f /dev/null
     ulimits:
       memlock:
         soft: -1
         hard: -1
     volumes:
-      - data01:/home/ubuntu/elasticsearch-7.6.1/data
-      - ./node01/elasticsearch.yml:/home/ubuntu/elasticsearch-7.6.1/config/elasticsearch.yml
-      - ./node01/jvm.options:/home/ubuntu/elasticsearch-7.6.1/config/jvm.options
+      - dataS2:/home/ubuntu/elasticsearch-7.6.1/data
+      - ./server2/elasticsearch.yml:/home/ubuntu/elasticsearch-7.6.1/config/elasticsearch.yml
+      - ./server2/jvm.options:/home/ubuntu/elasticsearch-7.6.1/config/jvm.options
     networks:
       - elastic
-  node02:
+  server3:
     image: jjauzion/es-single-node
-    container_name: node02
+    container_name: server3
     command: tail -f /dev/null
     ulimits:
       memlock:
         soft: -1
         hard: -1
     volumes:
-      - data02:/home/ubuntu/elasticsearch-7.6.1/data
-      - ./node02/elasticsearch.yml:/home/ubuntu/elasticsearch-7.6.1/config/elasticsearch.yml
-      - ./node02/jvm.options:/home/ubuntu/elasticsearch-7.6.1/config/jvm.options
+      - dataS3:/home/ubuntu/elasticsearch-7.6.1/data
+      - ./server3/elasticsearch.yml:/home/ubuntu/elasticsearch-7.6.1/config/elasticsearch.yml
+      - ./server3/jvm.options:/home/ubuntu/elasticsearch-7.6.1/config/jvm.options
     networks:
       - elastic
-  node03:
+  server4:
     image: jjauzion/es-single-node
-    container_name: node03
+    container_name: server4
     command: tail -f /dev/null
     ulimits:
       memlock:
         soft: -1
         hard: -1
     volumes:
-      - data03:/home/ubuntu/elasticsearch-7.6.1/data
-      - ./node03/elasticsearch.yml:/home/ubuntu/elasticsearch-7.6.1/config/elasticsearch.yml
-      - ./node03/jvm.options:/home/ubuntu/elasticsearch-7.6.1/config/jvm.options
+      - dataS4:/home/ubuntu/elasticsearch-7.6.1/data
+      - ./server4/elasticsearch.yml:/home/ubuntu/elasticsearch-7.6.1/config/elasticsearch.yml
+      - ./server4/jvm.options:/home/ubuntu/elasticsearch-7.6.1/config/jvm.options
+    networks:
+      - elastic
+  server5:
+    image: jjauzion/es-single-node
+    container_name: server5
+    command: tail -f /dev/null
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - dataS5:/home/ubuntu/elasticsearch-7.6.1/data
+      - ./server5/elasticsearch.yml:/home/ubuntu/elasticsearch-7.6.1/config/elasticsearch.yml
+      - ./server5/jvm.options:/home/ubuntu/elasticsearch-7.6.1/config/jvm.options
     networks:
       - elastic
 
 volumes:
-  data00:
+  dataS1:
     driver: local
-  data01:
+  dataS2:
     driver: local
-  data02:
+  dataS3:
     driver: local
-  data03:
+  dataS4:
+    driver: local
+  dataS5:
     driver: local
 
 networks:
