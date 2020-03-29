@@ -10,6 +10,7 @@ services:
         hard: -1
     volumes:
       - dataS1:/home/ubuntu/elasticsearch-7.6.1/data
+      - shared_folder:/home/ubuntu/shared_folder
       - ./server1/elasticsearch.yml:/home/ubuntu/elasticsearch-7.6.1/config/elasticsearch.yml
       - ./server1/jvm.options:/home/ubuntu/elasticsearch-7.6.1/config/jvm.options
     ports:
@@ -27,6 +28,7 @@ services:
         hard: -1
     volumes:
       - dataS2:/home/ubuntu/elasticsearch-7.6.1/data
+      - shared_folder:/home/ubuntu/shared_folder
       - ./server2/elasticsearch.yml:/home/ubuntu/elasticsearch-7.6.1/config/elasticsearch.yml
       - ./server2/jvm.options:/home/ubuntu/elasticsearch-7.6.1/config/jvm.options
     networks:
@@ -41,6 +43,7 @@ services:
         hard: -1
     volumes:
       - dataS3:/home/ubuntu/elasticsearch-7.6.1/data
+      - shared_folder:/home/ubuntu/shared_folder
       - ./server3/elasticsearch.yml:/home/ubuntu/elasticsearch-7.6.1/config/elasticsearch.yml
       - ./server3/jvm.options:/home/ubuntu/elasticsearch-7.6.1/config/jvm.options
     networks:
@@ -55,6 +58,7 @@ services:
         hard: -1
     volumes:
       - dataS4:/home/ubuntu/elasticsearch-7.6.1/data
+      - shared_folder:/home/ubuntu/shared_folder
       - ./server4/elasticsearch.yml:/home/ubuntu/elasticsearch-7.6.1/config/elasticsearch.yml
       - ./server4/jvm.options:/home/ubuntu/elasticsearch-7.6.1/config/jvm.options
     networks:
@@ -69,6 +73,7 @@ services:
         hard: -1
     volumes:
       - dataS5:/home/ubuntu/elasticsearch-7.6.1/data
+      - shared_folder:/home/ubuntu/shared_folder
       - ./server5/elasticsearch.yml:/home/ubuntu/elasticsearch-7.6.1/config/elasticsearch.yml
       - ./server5/jvm.options:/home/ubuntu/elasticsearch-7.6.1/config/jvm.options
     networks:

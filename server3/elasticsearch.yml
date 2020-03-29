@@ -1,3 +1,9 @@
+cluster.name: my_cluster
+node.name: node3
+network.host: _site_
+discovery.seed_hosts: ["server1", "server2", "server3"]
+cluster.initial_master_nodes: ["node1"]
+
 # ======================== Elasticsearch Configuration =========================
 #
 # NOTE: Elasticsearch comes with reasonable defaults for most settings.
