@@ -3,6 +3,13 @@ node.name: node3
 network.host: _site_
 discovery.seed_hosts: ["server1", "server2", "server3"]
 cluster.initial_master_nodes: ["node1"]
+path.repo: ["/home/ubuntu/shared_folder/my_repo"]
+node.attr.my_rack: rack1
+node.attr.my_temp: warm
+node.master: false
+node.data: true
+node.ingest: false
+node.ml: false
 
 # ======================== Elasticsearch Configuration =========================
 #

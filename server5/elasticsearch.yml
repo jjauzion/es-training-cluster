@@ -1,5 +1,13 @@
-cluster.name: my_secure_cluster
+cluster.name: my_cluster
 node.name: node5
 network.host: _site_
-cluster.initial_master_nodes: ["node5"]
-xpack.security.enabled: true
+cluster.initial_master_nodes: ["node1"]
+discovery.seed_hosts: ["server1", "server2", "server3", "server4"]
+path.repo: ["/home/ubuntu/shared_folder/my_repo"]
+
+# node.attr.my_rack: rack1
+# node.attr.my_temp: hot
+node.master: true
+node.data: false
+node.ingest: false
+node.ml: false

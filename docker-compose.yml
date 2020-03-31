@@ -90,6 +90,8 @@ volumes:
     driver: local
   dataS5:
     driver: local
+  shared_folder:
+    driver: local
 
 networks:
   elastic:
